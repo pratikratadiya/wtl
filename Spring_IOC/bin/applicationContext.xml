@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean id="employee" class="com.pratik.Employee" scope="prototype">
+		<!-- <property name="eId" value="100"></property>
+		<property name="eName" value="Pratik"></property>
+		<property name="eSalary" value="55000"></property>
+		<property name="eDept" value="Comp"></property>-->
+		<constructor-arg value="104"></constructor-arg>
+		<constructor-arg value="Pratik"></constructor-arg>
+		<constructor-arg value="55000"></constructor-arg>
+		<constructor-arg value="Comp"></constructor-arg>
+		
+	</bean>
+</beans>

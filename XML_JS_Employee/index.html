@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Salary calculator</title>
+</head>
+<body>
+Employee's data:<br><br>
+<table id="empTable">
+	<tr>
+		<th>Name</th>
+		<th>Sr. No</th>
+		<th>Department</th>
+		<th>Salary</th>
+	</tr>
+</table>
+<table id="statsTable">
+	<tr>
+		<th>Dept. Name</th>
+		<th>Number of Employees</th>
+		<th>Average Salary</th>
+	</tr>
+</table>
+</body>
+<script type="text/javascript">
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET","employee.xml",true);
+	xhttp.send()
+
+	xhttp.onreadystatechange = function(){
+		if(this.readyState==4 && this.status==200){
+			processFile(this);
+		}
+	}
+
+	function processFile(xml) {
+		// body...
+		var tabledata = document.getElementById('empTable').innerHTML;
+		var xmldata = xml.responseXML;
+		var empArray = xmldata.getElementsByTagName("employee");
+		var sc=0,sm=0,sg=0,cn=0,mn=0,gn=0;
+		for(var i=0;i<empArray.length;i++){
+			var name = empArray[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+			var id = empArray[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+			var dept = empArray[i].getElementsByTagName("department")[0].childNodes[0].nodeValue;
+			var salary = parseInt(empArray[i].getElementsByTagName("salary")[0].childNodes[0].nodeValue);
+
+			switch(dept){
+				case "Computer":
+					cn++;
+					sc+=salary;
+					break;
+
+				case "Mechanical":
+					mn++;
+					sm+=salary;
+					break;
+
+				case "Gaming":
+					gn++;
+					sg+=salary;
+					break;
+			}
+			tabledata += "<tr><td>"+name+"</td><td>"+id+"</td><td>"+dept+"</td><td>"+salary+"</td></tr>";
+		}
+		document.getElementById('empTable').innerHTML = tabledata;
+		sc = sc/cn;
+		sm = sm/mn;
+		sg = sg/gn;
+		document.getElementById('statsTable').innerHTML += "<tr><td>Computer</td><td>"+cn+"</td><td>"+sc+"</td></tr>"+"<tr><td>Mechanical</td><td>"+mn+"</td><td>"+sm+"</td></tr>"+"<tr><td>Gaming</td><td>"+gn+"</td><td>"+sg+"</td></tr>";
+	}
+</script>
+</html>

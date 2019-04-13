@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration for seminar</title>
+</head>
+<body>
+<form action="payment.html" onsubmit="return checkForm()">
+	Enter your name:<input type="text" name="name" id="name" required /><br>
+	Phone number: <input type="number" name="phno" id="phno" required /><br>
+	Enter your email: <input type="email" name="email" id="email" required /><br>
+	Current profession:<br>
+	<input type="radio" name="prof" value="Student">Student
+	<input type="radio" name="prof" value="Faculty member">Faculty member
+	<input type="radio" name="prof" value="Professional">Professional
+	<input type="radio" name="prof" value="Company representative">Company representative<br>
+	Country: <select name="Country">
+		<option>USA</option>
+		<option>India</option>
+		<option>Canada</option>
+	</select><br><br>
+	<input type="submit" value="Submit details">
+</form>
+</body>
+<script type="text/javascript">
+	function checkForm() {
+		// body...
+		var name = document.getElementById("name").value;
+		var phno = document.getElementById("phno").value;
+		if(!(/^[a-zA-Z ]+$/.test(name))){
+			alert("Incorrect name");
+			return false;
+		}
+		if(!(/^[987]{1}\d{9}/.test(phno))){
+			alert("Incorrect phone number");
+			return false;
+		}
+		var em = document.getElementById("email").value;
+		atpos = em.indexOf("@");
+		per = em.lastIndexOf(".");
+		if(atpos < 1 || (dotpos - atpos < 2)){
+			alert("Invalid email");
+			return false;
+		}
+		return true;
+	}
+</script>
+</html>
